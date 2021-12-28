@@ -9,6 +9,7 @@ GEM
     rake (13.0.6)
 
 PLATFORMS
+  universal-darwin-20
   x86_64-darwin-19
 
 DEPENDENCIES
@@ -16,4 +17,4 @@ DEPENDENCIES
   rake (~> 13.0.6)
 
 BUNDLED WITH
-   2.2.5
+   2.3.3
