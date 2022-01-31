@@ -1,5 +1,5 @@
 task :environment do 
-  require_relative './chain'
+  require_relative './src/chain'
 end
 
 task console: [:environment] do

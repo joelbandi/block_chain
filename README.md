@@ -12,11 +12,16 @@ The Proof of work algorithm can also be customized in the constructor
 
      c.add_block('any_data') # adds a new block
 
-     c.chain # returns chain
+     # A Chain instance is an enumerable so enumerable methods work
 
-     c.last # returns last block
+     c.map { |block| block.data }
 
+     # Custom proof proof work algorithms can be implemented
      c2 = Chain.new do |block_to_be_mined|
        block_to_be_mined.hash.start_with?('1234')
      end
+
+     # Each block has accessor methods
+    attr_accessor :index, :data, :nonce, :previous_hash, :timestamp
+
    ```
