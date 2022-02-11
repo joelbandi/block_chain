@@ -42,3 +42,4 @@ The Proof of work algorithm can also be customized in the constructor
 6. Start supporting transactions through the network
 7. Authenticity through public-private keys
 8. Mining rewards in the form of tokens/coins
+9. Merkle proofs and lightweight nodes for scalability!
