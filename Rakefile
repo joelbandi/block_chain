@@ -16,6 +16,12 @@ task :discovery do
   system 'ruby ./src/usenet/discovery_service.rb'
 end
 
+desc 'Start a Peer instance'
+task :peer, [:port, :name] do |_, args|
+  puts "Starting a Peer instance..."
+  system "ruby ./src/usenet/peer.rb #{args[:port]} #{args[:name]}"
+end
+
 Rake::TestTask.new(:test) do |t|
   t.libs << "test"
   t.test_files = FileList["test/**/*_test.rb"]
