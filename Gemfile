@@ -1,6 +1,9 @@
 source 'https://rubygems.org'
 
 gem "colorize", "~> 0.8.1"
+gem "concurrent-ruby", "~> 1.1"
+gem "faraday", "~> 2.2"
+gem "sinatra", "~> 2.2.0"
 
 group :development, :test do
   gem 'minitest', '~> 5.14', '>= 5.14.4'
