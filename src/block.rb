@@ -30,8 +30,6 @@ class Block
     TEXT
   end
 
-  private
-
   def serialize
     {
       index: @index,

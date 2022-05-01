@@ -3,12 +3,13 @@ require_relative 'block'
 class Chain
   include Enumerable
 
+  attr_accessor :chain, :proof_of_work
+
   def initialize(&proof_of_work)
     proof_of_work ||= proc { |unmined_block| unmined_block.hash.start_with?('0000') }
 
     @chain = []
     @proof_of_work = proof_of_work
-    add_block('genesis_block')
   end
 
   def add_block(data)
@@ -27,11 +28,12 @@ class Chain
   end
 
   def to_s
-    delimiter = <<-TEXT
-                                      |
-                                      |
-                                      v
-    TEXT
+    delimiter = [
+      "|".rjust(38),
+      "|".rjust(38),
+      "v".rjust(38),
+      "",
+    ].join("\n")
 
     map(&:to_s).join(delimiter)
   end
@@ -50,9 +52,27 @@ class Chain
     end
   end
 
-  private
+  def serialize
+    map(&:serialize)
+  end
 
-  attr_accessor :chain, :proof_of_work
+  def self.deserialize(source)
+    instance = new
+
+    source.each do |block_data|
+      instance.chain << Block.new(
+        index: block_data[:index],
+        nonce: block_data[:nonce],
+        data: block_data[:data],
+        timestamp: block_data[:timestamp],
+        previous_hash: block_data[:previous_hash]
+      )
+    end
+
+    instance if instance.valid?
+  end
+
+  private
 
   def mine(new_block)
     until proof_of_work.call(new_block)
