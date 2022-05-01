@@ -1,3 +1,4 @@
+require 'concurrent/array'
 require_relative 'block'
 
 class Chain
@@ -8,7 +9,7 @@ class Chain
   def initialize(&proof_of_work)
     proof_of_work ||= proc { |unmined_block| unmined_block.hash.start_with?('0000') }
 
-    @chain = []
+    @chain = Concurrent::Array.new
     @proof_of_work = proof_of_work
   end
 
