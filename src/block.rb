@@ -5,12 +5,12 @@ require 'colorize'
 class Block
   attr_accessor :index, :data, :nonce, :previous_hash, :timestamp
 
-  def initialize(index:, data:, nonce:, previous_hash:)
+  def initialize(index:, data:, nonce:, previous_hash:, timestamp: Time.now.utc.to_i)
     @index = index
     @data = data
     @nonce = nonce
     @previous_hash = previous_hash
-    @timestamp = Time.now.utc.to_i 
+    @timestamp = timestamp 
   end
 
   def hash
@@ -30,15 +30,13 @@ class Block
     TEXT
   end
 
-  private
-
   def serialize
     {
-      index: @index,
-      nonce: @nonce,
+      index: index,
+      nonce: nonce,
       data: data,
-      timestamp: @timestamp,
-      previous_hash: @previous_hash
+      timestamp: timestamp,
+      previous_hash: previous_hash
     }
   end
 end
